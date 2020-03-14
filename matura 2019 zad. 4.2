@@ -1,0 +1,45 @@
+#include <iostream>
+#include <fstream>
+
+/*
+MATURA 2019
+zad. 4.2
+*/
+
+
+using namespace std;
+
+long int silnia(int liczba)
+{
+    long int silnia = 1;
+
+    for (int i = 2; i <= liczba; i++) {
+        silnia *= i;
+    }
+    return silnia;
+}
+
+int main()
+{
+    fstream plik;
+    plik.open("liczby.txt");
+    long int liczbaZPliku = 0;
+
+    for (int i = 0; i < 500; i++) {
+        plik >> liczbaZPliku;
+        long int temp = 0;
+        long int temp2 = liczbaZPliku;
+        long int sumaSilni = 0;
+
+        do {
+            temp = temp2 % 10;
+            sumaSilni = sumaSilni + silnia(temp);
+            temp2 = temp2 / 10;
+        } while (temp2);
+
+        if (liczbaZPliku == sumaSilni) {
+            cout << liczbaZPliku << endl;
+        }
+    }
+    return 0;
+}
